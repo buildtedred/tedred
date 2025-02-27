@@ -1,0 +1,170 @@
+{
+  "nav": {
+    "services": "Services",
+    "our-work": "Our Work",
+    "company": "Company",
+    "resources": "Resources",
+    "getStarted": "Get Started",
+    "about": "About Us",
+    "aboutDescription": "Meet the team behind TedRed",
+    "careers": "Careers",
+    "careersDescription": "Join our growing team",
+    "caseStudies": "Case Studies",
+    "caseStudiesDescription": "View our success stories",
+    "blog": "Blog",
+    "blogDescription": "Latest insights & news",
+    "contact": "Contact",
+    "contactDescription": "Get in touch with us",
+    "tedredStories": "TedRed Stories",
+    "tedredStoriesDescription": "Discover our journey and success stories",
+    "aboutUs": "About Us",
+    "aboutUsDescription": "Learn about our mission and values",
+    "lifeAtTedred": "Life at TedRed",
+    "lifeAtTedredDescription": "Experience our unique culture"
+  },
+  "hero": {
+    "badge": "Redefining Digital Excellence",
+    "preTitle": "We Create Future-Ready",
+    "solutions": "Solutions for",
+    "animatedTexts": {
+      "1": "Digital Excellence",
+      "2": "Brand Innovation",
+      "3": "Tech Solutions",
+      "4": "Growth Strategy"
+    },
+    "description": "Empowering businesses with cutting-edge technology and innovative solutions to dominate the digital landscape.",
+    "stats": {
+      "projects": "Projects Delivered",
+      "satisfaction": "Client Satisfaction",
+      "projectsCount": "500+",
+      "satisfactionRate": "98%"
+    },
+    "cta": "Let's Build Something Amazing",
+    "trust": {
+      "security": "Enterprise Security",
+      "support": "24/7 Support"
+    }
+  },
+  "portfolio": {
+    "badge": "Client Results",
+    "title": "Transforming Businesses",
+    "description": "Trackable results for clients across dozens of industries.",
+    "categories": {
+      "all": "All Projects",
+      "webDev": "Web Development",
+      "enterprise": "Enterprise",
+      "finance": "Finance",
+      "marketing": "Digital Marketing"
+    },
+    "project": {
+      "viewDetails": "View Details",
+      "challenge": "The Challenge",
+      "solution": "Our Solution",
+      "features": "Key Features",
+      "results": "Key Results",
+      "testimonial": "Client Testimonial",
+      "technologies": "Technologies Used",
+      "timeline": "Project Timeline",
+      "stats": {
+        "loadSpeed": "Page Load Speed",
+        "engagement": "User Engagement",
+        "bounceRate": "Bounce Rate",
+        "efficiency": "Process Efficiency",
+        "costs": "Operational Costs",
+        "uptime": "System Uptime"
+      }
+    }
+  },
+  "challenge": {
+    "badge": "Common Challenges",
+    "title": "Building Digital Solutions",
+    "description": "We understand the challenges businesses face when building digital solutions. Our expertise helps overcome these hurdles and accelerate success.",
+    "sections": {
+      "vision": {
+        "title": "Vision to Reality",
+        "description": "Turning innovative ideas into successful digital products",
+        "solutions": [
+          "Expert consultation on technology stack",
+          "Rapid prototyping and MVP development",
+          "Scalable architecture planning"
+        ]
+      },
+      "resources": {
+        "title": "Resource Optimization",
+        "description": "Maximizing ROI while minimizing development costs",
+        "solutions": [
+          "Cost-effective development strategies",
+          "Resource allocation optimization",
+          "Budget-friendly technology solutions"
+        ]
+      },
+      "time": {
+        "title": "Time to Market",
+        "description": "Accelerating development without compromising quality",
+        "solutions": [
+          "Agile development methodology",
+          "Parallel development tracks",
+          "Automated testing & deployment"
+        ]
+      },
+      "market": {
+        "title": "Market Fit",
+        "description": "Ensuring your solution meets market demands",
+        "solutions": [
+          "Market research & validation",
+          "User feedback integration",
+          "Competitive analysis"
+        ]
+      }
+    },
+    "stats": {
+      "timeToMarket": "Faster Time to Market",
+      "costReduction": "Cost Reduction",
+      "successRate": "Project Success Rate"
+    }
+  },
+  "clients": {
+    "badge": "Our Partners in Innovation",
+    "title": "Empowering Growth-Focused Businesses",
+    "description": "Trusted technology partner for startups and mid-sized companies driving digital innovation",
+    "categories": {
+      "startups": {
+        "title": "Tech Startups",
+        "industry": "SaaS & Technology",
+        "description": "Helping innovative startups scale"
+      },
+      "companies": {
+        "title": "Mid-Size Companies",
+        "industry": "Various Sectors",
+        "description": "Digital transformation partners"
+      },
+      "services": {
+        "title": "Service Providers",
+        "industry": "Professional Services",
+        "description": "Enhancing service delivery"
+      },
+      "agencies": {
+        "title": "Digital Agencies",
+        "industry": "Creative & Marketing",
+        "description": "Powering creative solutions"
+      }
+    },
+    "stats": {
+      "growth": {
+        "title": "Startup Growth Rate",
+        "value": "180%",
+        "description": "Average growth for startup clients"
+      },
+      "speed": {
+        "title": "Development Speed",
+        "value": "65%",
+        "description": "Faster time to market"
+      },
+      "retention": {
+        "title": "Client Retention",
+        "value": "94%",
+        "description": "Long-term partnerships"
+      }
+    }
+  }
+}
