@@ -147,7 +147,9 @@ export const PersonalInfoStep = ({ formData, updateFormData, onNext }: PersonalI
   
   return (
     <div className="mx-auto">
-      <h2 className="text-xl sm:text-2xl font-bold mb-5 sm:mb-8 mt-1 sm:mt-2">Personal Information</h2>
+      <h2 className="text-2xl sm:text-2xl font-bold mb-5 sm:mb-7 mt-2 text-center sm:text-left">
+        <span className="inline-block pb-1 border-b-2 border-red-500">Personal Information</span>
+      </h2>
       <motion.form
         onSubmit={handleSubmit}
         variants={containerVariants}
@@ -155,7 +157,7 @@ export const PersonalInfoStep = ({ formData, updateFormData, onNext }: PersonalI
         animate="visible"
         className="mx-auto"
       >
-        <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 sm:gap-x-8 gap-y-4 sm:gap-y-6 mb-6 sm:mb-8" variants={itemVariants}>
+        <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 sm:gap-x-8 gap-y-5 sm:gap-y-6 mb-7 sm:mb-8" variants={itemVariants}>
           <div>
             <label className="block text-zinc-300 mb-1.5 sm:mb-2 font-medium text-sm sm:text-base" htmlFor="firstName">
               First Name*
@@ -169,7 +171,7 @@ export const PersonalInfoStep = ({ formData, updateFormData, onNext }: PersonalI
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className={`
-                  w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-zinc-900 border rounded-lg focus:outline-none text-white transition-colors duration-200 text-sm sm:text-base
+                  w-full px-3.5 sm:px-4 py-3 sm:py-3 bg-zinc-900 border rounded-lg focus:outline-none text-white transition-colors duration-200 text-sm sm:text-base
                   ${getFieldError('firstName') 
                     ? 'border-red-500 focus:border-red-500' 
                     : isFieldValid('firstName')
@@ -189,7 +191,7 @@ export const PersonalInfoStep = ({ formData, updateFormData, onNext }: PersonalI
               )}
             </div>
             {getFieldError('firstName') && (
-              <p className="mt-1 text-xs text-red-500">{getFieldError('firstName')}</p>
+              <p className="mt-1.5 text-xs text-red-500 font-medium">{getFieldError('firstName')}</p>
             )}
           </div>
           <div>
@@ -205,7 +207,7 @@ export const PersonalInfoStep = ({ formData, updateFormData, onNext }: PersonalI
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className={`
-                  w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-zinc-900 border rounded-lg focus:outline-none text-white transition-colors duration-200 text-sm sm:text-base
+                  w-full px-3.5 sm:px-4 py-3 sm:py-3 bg-zinc-900 border rounded-lg focus:outline-none text-white transition-colors duration-200 text-sm sm:text-base
                   ${getFieldError('lastName') 
                     ? 'border-red-500 focus:border-red-500' 
                     : isFieldValid('lastName')
@@ -225,12 +227,12 @@ export const PersonalInfoStep = ({ formData, updateFormData, onNext }: PersonalI
               )}
             </div>
             {getFieldError('lastName') && (
-              <p className="mt-1 text-xs text-red-500">{getFieldError('lastName')}</p>
+              <p className="mt-1.5 text-xs text-red-500 font-medium">{getFieldError('lastName')}</p>
             )}
           </div>
         </motion.div>
         
-        <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 sm:gap-x-8 gap-y-4 sm:gap-y-6 mb-8 sm:mb-10" variants={itemVariants}>
+        <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 sm:gap-x-8 gap-y-5 sm:gap-y-6 mb-7 sm:mb-8" variants={itemVariants}>
           <div>
             <label className="block text-zinc-300 mb-1.5 sm:mb-2 font-medium text-sm sm:text-base" htmlFor="email">
               Email Address*
@@ -244,7 +246,7 @@ export const PersonalInfoStep = ({ formData, updateFormData, onNext }: PersonalI
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className={`
-                  w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-zinc-900 border rounded-lg focus:outline-none text-white transition-colors duration-200 text-sm sm:text-base
+                  w-full px-3.5 sm:px-4 py-3 sm:py-3 bg-zinc-900 border rounded-lg focus:outline-none text-white transition-colors duration-200 text-sm sm:text-base
                   ${getFieldError('email') 
                     ? 'border-red-500 focus:border-red-500' 
                     : isFieldValid('email')
@@ -264,7 +266,7 @@ export const PersonalInfoStep = ({ formData, updateFormData, onNext }: PersonalI
               )}
             </div>
             {getFieldError('email') && (
-              <p className="mt-1 text-xs text-red-500">{getFieldError('email')}</p>
+              <p className="mt-1.5 text-xs text-red-500 font-medium">{getFieldError('email')}</p>
             )}
           </div>
           <div>
@@ -280,7 +282,7 @@ export const PersonalInfoStep = ({ formData, updateFormData, onNext }: PersonalI
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className={`
-                  w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-zinc-900 border rounded-lg focus:outline-none text-white transition-colors duration-200 text-sm sm:text-base
+                  w-full px-3.5 sm:px-4 py-3 sm:py-3 bg-zinc-900 border rounded-lg focus:outline-none text-white transition-colors duration-200 text-sm sm:text-base
                   ${getFieldError('phone') 
                     ? 'border-red-500 focus:border-red-500' 
                     : isFieldValid('phone')
@@ -300,16 +302,16 @@ export const PersonalInfoStep = ({ formData, updateFormData, onNext }: PersonalI
               )}
             </div>
             {getFieldError('phone') && (
-              <p className="mt-1 text-xs text-red-500">{getFieldError('phone')}</p>
+              <p className="mt-1.5 text-xs text-red-500 font-medium">{getFieldError('phone')}</p>
             )}
           </div>
         </motion.div>
         
-        <motion.div className="flex justify-end mt-6 sm:mt-8" variants={itemVariants}>
+        <motion.div variants={itemVariants} className="text-right">
           <button
             type="submit"
-            className="bg-red-500 hover:bg-red-600 text-white font-medium py-2.5 sm:py-3 px-6 sm:px-8 rounded-lg transition-colors duration-200 flex items-center text-sm sm:text-base"
-            disabled={Object.keys(validationErrors).length > 0 && Object.keys(touchedFields).length > 0}
+            className="inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 bg-red-500 hover:bg-red-600 text-white font-medium rounded-lg transition-colors duration-200 text-sm sm:text-base shadow-md hover:shadow-lg"
+            disabled={Object.keys(validationErrors).length > 0 && Object.keys(touchedFields).length === 4}
           >
             Next
             <svg className="w-4 h-4 sm:w-5 sm:h-5 ml-1.5 sm:ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
