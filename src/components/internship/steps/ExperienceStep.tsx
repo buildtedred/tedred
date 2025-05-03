@@ -164,7 +164,7 @@ export const ExperienceStep = ({ formData, updateFormData, onNext, onPrevious }:
   return (
     <div className="mx-auto">
       <style>{datePickerCustomStyles}</style>
-      <h2 className="text-2xl font-bold mb-6 mt-2">Experience & Skills</h2>
+      <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 mt-1 sm:mt-2">Experience & Skills</h2>
       <form onSubmit={handleSubmit}>
         <motion.div
           variants={containerVariants}
@@ -173,15 +173,15 @@ export const ExperienceStep = ({ formData, updateFormData, onNext, onPrevious }:
           className="mx-auto"
         >
           <motion.div variants={itemVariants}>
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-medium">Work Experience</h3>
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-3 sm:mb-4 gap-2">
+              <h3 className="text-lg sm:text-xl font-medium">Work Experience</h3>
               <button
                 type="button"
                 onClick={handleSkip}
-                className="text-zinc-400 hover:text-red-400 transition-colors duration-200 flex items-center text-sm font-medium"
+                className="text-zinc-400 hover:text-red-400 transition-colors duration-200 flex items-center text-xs sm:text-sm font-medium self-end sm:self-auto"
               >
                 No experience? Skip
-                <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                 </svg>
               </button>
@@ -191,52 +191,52 @@ export const ExperienceStep = ({ formData, updateFormData, onNext, onPrevious }:
           {formData.experience.map((exp: any, index: number) => (
             <motion.div 
               key={index} 
-              className="bg-zinc-900/50 border border-zinc-800 p-5 mb-6 rounded-lg"
+              className="bg-zinc-900/50 border border-zinc-800 p-3 sm:p-5 mb-4 sm:mb-6 rounded-lg"
               variants={itemVariants}
             >
-              <div className="flex justify-between items-center mb-4">
-                <h3 className="font-medium text-lg">Experience #{index + 1}</h3>
+              <div className="flex justify-between items-center mb-3 sm:mb-4">
+                <h3 className="font-medium text-base sm:text-lg">Experience #{index + 1}</h3>
                 {formData.experience.length > 1 && (
                   <button
                     type="button"
                     onClick={() => removeExperience(index)}
-                    className="text-red-400 hover:text-red-300 transition-colors"
+                    className="text-red-400 hover:text-red-300 transition-colors text-sm"
                   >
                     Remove
                   </button>
                 )}
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3 sm:gap-y-4 mb-3 sm:mb-4">
                 <div>
-                  <label className="block text-zinc-300 mb-2 font-medium">
+                  <label className="block text-zinc-300 mb-1 sm:mb-2 font-medium text-sm sm:text-base">
                     Company/Organization
                   </label>
                   <input
                     type="text"
                     value={exp.company}
                     onChange={(e) => handleExperienceChange(index, 'company', e.target.value)}
-                    className="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-lg focus:outline-none focus:border-red-500 text-white"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-zinc-900 border border-zinc-700 rounded-lg focus:outline-none focus:border-red-500 text-white text-sm sm:text-base"
                     placeholder="Company name"
                   />
                 </div>
                 <div>
-                  <label className="block text-zinc-300 mb-2 font-medium">
+                  <label className="block text-zinc-300 mb-1 sm:mb-2 font-medium text-sm sm:text-base">
                     Position
                   </label>
                   <input
                     type="text"
                     value={exp.position}
                     onChange={(e) => handleExperienceChange(index, 'position', e.target.value)}
-                    className="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-lg focus:outline-none focus:border-red-500 text-white"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-zinc-900 border border-zinc-700 rounded-lg focus:outline-none focus:border-red-500 text-white text-sm sm:text-base"
                     placeholder="Your role"
                   />
                 </div>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3 sm:gap-y-4 mb-3 sm:mb-4">
                 <div>
-                  <label className="block text-zinc-300 mb-2 font-medium">
+                  <label className="block text-zinc-300 mb-1 sm:mb-2 font-medium text-sm sm:text-base">
                     Start Date
                   </label>
                   <DatePicker
@@ -245,11 +245,11 @@ export const ExperienceStep = ({ formData, updateFormData, onNext, onPrevious }:
                     dateFormat="MM/yyyy"
                     showMonthYearPicker
                     placeholderText="MM/YYYY"
-                    className="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-lg focus:outline-none focus:border-red-500 text-white"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-zinc-900 border border-zinc-700 rounded-lg focus:outline-none focus:border-red-500 text-white text-sm sm:text-base"
                   />
                 </div>
                 <div>
-                  <label className="block text-zinc-300 mb-2 font-medium">
+                  <label className="block text-zinc-300 mb-1 sm:mb-2 font-medium text-sm sm:text-base">
                     End Date
                   </label>
                   <DatePicker
@@ -258,40 +258,40 @@ export const ExperienceStep = ({ formData, updateFormData, onNext, onPrevious }:
                     dateFormat="MM/yyyy"
                     showMonthYearPicker
                     placeholderText="MM/YYYY or Present"
-                    className="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-lg focus:outline-none focus:border-red-500 text-white"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-zinc-900 border border-zinc-700 rounded-lg focus:outline-none focus:border-red-500 text-white text-sm sm:text-base"
                   />
                 </div>
               </div>
               
               <div>
-                <label className="block text-zinc-300 mb-2 font-medium">
+                <label className="block text-zinc-300 mb-1 sm:mb-2 font-medium text-sm sm:text-base">
                   Description
                 </label>
                 <textarea
                   value={exp.description}
                   onChange={(e) => handleExperienceChange(index, 'description', e.target.value)}
-                  className="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-lg focus:outline-none focus:border-red-500 text-white min-h-[100px]"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-zinc-900 border border-zinc-700 rounded-lg focus:outline-none focus:border-red-500 text-white min-h-[80px] sm:min-h-[100px] text-sm sm:text-base"
                   placeholder="Describe your responsibilities and achievements"
                 />
               </div>
             </motion.div>
           ))}
           
-          <motion.div className="mb-8 mt-4" variants={itemVariants}>
+          <motion.div className="mb-6 sm:mb-8 mt-3 sm:mt-4" variants={itemVariants}>
             <button
               type="button"
               onClick={addExperience}
-              className="w-full py-3 border border-dashed border-zinc-700 hover:border-zinc-500 rounded-lg text-zinc-400 hover:text-zinc-300 transition-colors duration-200 flex items-center justify-center"
+              className="w-full py-2 sm:py-3 border border-dashed border-zinc-700 hover:border-zinc-500 rounded-lg text-zinc-400 hover:text-zinc-300 transition-colors duration-200 flex items-center justify-center text-sm sm:text-base"
             >
-              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
               </svg>
               Add Another Experience
             </button>
           </motion.div>
           
-          <motion.div className="mb-8" variants={itemVariants}>
-            <h3 className="text-xl font-medium mb-4">Skills</h3>
+          <motion.div className="mb-6 sm:mb-8" variants={itemVariants}>
+            <h3 className="text-lg sm:text-xl font-medium mb-3 sm:mb-4">Skills</h3>
             <div className="flex flex-wrap gap-2 mb-4">
               {formData.skills.map((skill: string, index: number) => (
                 <div key={index} className="bg-zinc-900/50 border border-zinc-800 py-1 px-3 rounded-full flex items-center">
@@ -342,13 +342,13 @@ export const ExperienceStep = ({ formData, updateFormData, onNext, onPrevious }:
             </div>
           </motion.div>
           
-          <motion.div className="flex justify-between mt-10" variants={itemVariants}>
+          <motion.div className="flex justify-between mt-8 sm:mt-10" variants={itemVariants}>
             <button
               type="button"
               onClick={onPrevious}
-              className="bg-zinc-800 hover:bg-zinc-700 text-white font-medium py-3 px-8 rounded-lg transition-colors duration-200 flex items-center"
+              className="bg-zinc-800 hover:bg-zinc-700 text-white font-medium py-2 sm:py-3 px-6 sm:px-8 rounded-lg transition-colors duration-200 flex items-center text-sm sm:text-base"
             >
-              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"></path>
               </svg>
               Back
@@ -356,10 +356,10 @@ export const ExperienceStep = ({ formData, updateFormData, onNext, onPrevious }:
             
             <button
               type="submit"
-              className="bg-red-500 hover:bg-red-600 text-white font-medium py-3 px-8 rounded-lg transition-colors duration-200 flex items-center"
+              className="bg-red-500 hover:bg-red-600 text-white font-medium py-2 sm:py-3 px-6 sm:px-8 rounded-lg transition-colors duration-200 flex items-center text-sm sm:text-base"
             >
               Next
-              <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5 ml-1 sm:ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"></path>
               </svg>
             </button>

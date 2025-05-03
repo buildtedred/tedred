@@ -147,7 +147,7 @@ export const PersonalInfoStep = ({ formData, updateFormData, onNext }: PersonalI
   
   return (
     <div className="mx-auto">
-      <h2 className="text-2xl font-bold mb-8 mt-2">Personal Information</h2>
+      <h2 className="text-xl sm:text-2xl font-bold mb-5 sm:mb-8 mt-1 sm:mt-2">Personal Information</h2>
       <motion.form
         onSubmit={handleSubmit}
         variants={containerVariants}
@@ -155,9 +155,9 @@ export const PersonalInfoStep = ({ formData, updateFormData, onNext }: PersonalI
         animate="visible"
         className="mx-auto"
       >
-        <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 mb-8" variants={itemVariants}>
+        <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 sm:gap-x-8 gap-y-4 sm:gap-y-6 mb-6 sm:mb-8" variants={itemVariants}>
           <div>
-            <label className="block text-zinc-300 mb-2 font-medium" htmlFor="firstName">
+            <label className="block text-zinc-300 mb-1.5 sm:mb-2 font-medium text-sm sm:text-base" htmlFor="firstName">
               First Name*
             </label>
             <div className="relative">
@@ -169,7 +169,7 @@ export const PersonalInfoStep = ({ formData, updateFormData, onNext }: PersonalI
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className={`
-                  w-full px-4 py-3 bg-zinc-900 border rounded-lg focus:outline-none text-white transition-colors duration-200
+                  w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-zinc-900 border rounded-lg focus:outline-none text-white transition-colors duration-200 text-sm sm:text-base
                   ${getFieldError('firstName') 
                     ? 'border-red-500 focus:border-red-500' 
                     : isFieldValid('firstName')
@@ -182,7 +182,7 @@ export const PersonalInfoStep = ({ formData, updateFormData, onNext }: PersonalI
               />
               {isFieldValid('firstName') && (
                 <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-green-500">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
@@ -193,7 +193,7 @@ export const PersonalInfoStep = ({ formData, updateFormData, onNext }: PersonalI
             )}
           </div>
           <div>
-            <label className="block text-zinc-300 mb-2 font-medium" htmlFor="lastName">
+            <label className="block text-zinc-300 mb-1.5 sm:mb-2 font-medium text-sm sm:text-base" htmlFor="lastName">
               Last Name*
             </label>
             <div className="relative">
@@ -205,7 +205,7 @@ export const PersonalInfoStep = ({ formData, updateFormData, onNext }: PersonalI
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className={`
-                  w-full px-4 py-3 bg-zinc-900 border rounded-lg focus:outline-none text-white transition-colors duration-200
+                  w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-zinc-900 border rounded-lg focus:outline-none text-white transition-colors duration-200 text-sm sm:text-base
                   ${getFieldError('lastName') 
                     ? 'border-red-500 focus:border-red-500' 
                     : isFieldValid('lastName')
@@ -218,7 +218,7 @@ export const PersonalInfoStep = ({ formData, updateFormData, onNext }: PersonalI
               />
               {isFieldValid('lastName') && (
                 <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-green-500">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
@@ -230,9 +230,9 @@ export const PersonalInfoStep = ({ formData, updateFormData, onNext }: PersonalI
           </div>
         </motion.div>
         
-        <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 mb-10" variants={itemVariants}>
+        <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 sm:gap-x-8 gap-y-4 sm:gap-y-6 mb-8 sm:mb-10" variants={itemVariants}>
           <div>
-            <label className="block text-zinc-300 mb-2 font-medium" htmlFor="email">
+            <label className="block text-zinc-300 mb-1.5 sm:mb-2 font-medium text-sm sm:text-base" htmlFor="email">
               Email Address*
             </label>
             <div className="relative">
@@ -244,7 +244,7 @@ export const PersonalInfoStep = ({ formData, updateFormData, onNext }: PersonalI
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className={`
-                  w-full px-4 py-3 bg-zinc-900 border rounded-lg focus:outline-none text-white transition-colors duration-200
+                  w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-zinc-900 border rounded-lg focus:outline-none text-white transition-colors duration-200 text-sm sm:text-base
                   ${getFieldError('email') 
                     ? 'border-red-500 focus:border-red-500' 
                     : isFieldValid('email')
@@ -257,7 +257,7 @@ export const PersonalInfoStep = ({ formData, updateFormData, onNext }: PersonalI
               />
               {isFieldValid('email') && (
                 <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-green-500">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
@@ -268,7 +268,7 @@ export const PersonalInfoStep = ({ formData, updateFormData, onNext }: PersonalI
             )}
           </div>
           <div>
-            <label className="block text-zinc-300 mb-2 font-medium" htmlFor="phone">
+            <label className="block text-zinc-300 mb-1.5 sm:mb-2 font-medium text-sm sm:text-base" htmlFor="phone">
               Phone Number*
             </label>
             <div className="relative">
@@ -280,7 +280,7 @@ export const PersonalInfoStep = ({ formData, updateFormData, onNext }: PersonalI
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className={`
-                  w-full px-4 py-3 bg-zinc-900 border rounded-lg focus:outline-none text-white transition-colors duration-200
+                  w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-zinc-900 border rounded-lg focus:outline-none text-white transition-colors duration-200 text-sm sm:text-base
                   ${getFieldError('phone') 
                     ? 'border-red-500 focus:border-red-500' 
                     : isFieldValid('phone')
@@ -293,7 +293,7 @@ export const PersonalInfoStep = ({ formData, updateFormData, onNext }: PersonalI
               />
               {isFieldValid('phone') && (
                 <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-green-500">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
@@ -305,14 +305,14 @@ export const PersonalInfoStep = ({ formData, updateFormData, onNext }: PersonalI
           </div>
         </motion.div>
         
-        <motion.div className="flex justify-end mt-8" variants={itemVariants}>
+        <motion.div className="flex justify-end mt-6 sm:mt-8" variants={itemVariants}>
           <button
             type="submit"
-            className="bg-red-500 hover:bg-red-600 text-white font-medium py-3 px-8 rounded-lg transition-colors duration-200 flex items-center"
+            className="bg-red-500 hover:bg-red-600 text-white font-medium py-2.5 sm:py-3 px-6 sm:px-8 rounded-lg transition-colors duration-200 flex items-center text-sm sm:text-base"
             disabled={Object.keys(validationErrors).length > 0 && Object.keys(touchedFields).length > 0}
           >
             Next
-            <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <svg className="w-4 h-4 sm:w-5 sm:h-5 ml-1.5 sm:ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"></path>
             </svg>
           </button>

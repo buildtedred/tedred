@@ -130,11 +130,8 @@ export const SubmissionStep = ({
         <p className="text-zinc-300 mb-6">
           Thank you for applying to the TedRed Internship Program. We've received your application and will be in touch soon.
         </p>
-        <p className="text-zinc-400 text-sm mb-2">
-          A confirmation email has been sent to {formData.email}
-        </p>
         {interviewDate && (
-          <p className="text-zinc-300 mb-6">
+          <p className="text-zinc-300 mb-4">
             Your interview is scheduled for{' '}
             <span className="font-medium text-red-400">
               {interviewDate.toLocaleDateString('en-US', { 
@@ -148,12 +145,26 @@ export const SubmissionStep = ({
             </span>
           </p>
         )}
+        <div className="bg-blue-900/20 border border-blue-800 rounded-lg p-4 mx-auto max-w-md mb-6">
+          <p className="text-blue-300 font-medium mb-2 flex items-center justify-center">
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Important Next Step
+          </p>
+          <p className="text-zinc-300 text-sm">
+            Please proceed to the next screen where you'll be able to generate a PDF summary of your application. 
+            <span className="text-blue-300 font-medium block mt-1">
+              Download this PDF and email it to <span className="underline">hr@tedred.com</span> to complete your application process.
+            </span>
+          </p>
+        </div>
         <div>
           <a 
             href="/" 
             className="inline-flex items-center justify-center px-6 py-3 rounded-lg font-medium bg-red-500 hover:bg-red-600 text-white transition-colors duration-200"
           >
-            Return to Homepage
+            Continue
           </a>
         </div>
       </motion.div>
@@ -241,12 +252,129 @@ export const SubmissionStep = ({
             <div>
               <span className="text-zinc-400">Phone:</span> {formData.phone}
             </div>
+            
+            {formData.ikigaiResults?.departmentRecommendations?.length > 0 && (
+              <div className="col-span-1 md:col-span-2 mt-1 mb-1 bg-red-500/10 border border-red-500/30 rounded p-3">
+                <div className="flex items-center gap-2 mb-2">
+                  <svg className="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                  <span className="text-zinc-200 font-medium">Ikigai Assessment</span>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div>
+                    <span className="text-zinc-400">Top Recommended Department:</span>{' '}
+                    <span className="text-red-400">{formData.ikigaiResults.departmentRecommendations[0]?.department}</span>
+                  </div>
+                  {formData.ikigaiResults.teamSuggestions?.length > 0 && (
+                    <div>
+                      <span className="text-zinc-400">Recommended Teams:</span>{' '}
+                      <span className="text-zinc-300">{formData.ikigaiResults.teamSuggestions.join(', ')}</span>
+                    </div>
+                  )}
+                  
+                  {formData.ikigaiResults.softSkills?.length > 0 && (
+                    <div>
+                      <span className="text-zinc-400">Key Strengths:</span>{' '}
+                      <span className="text-zinc-300">{formData.ikigaiResults.softSkills.join(', ')}</span>
+                    </div>
+                  )}
+                  
+                  {formData.ikigaiResults.languages?.length > 0 && (
+                    <div className="col-span-1 md:col-span-2 mt-1">
+                      <span className="text-zinc-400">Languages:</span>
+                      
+                      {(() => {
+                        // Group languages by region
+                        const langs = formData.ikigaiResults.languages;
+                        const southAsian = langs.filter((l: {language: string}) => 
+                          ["Urdu", "Hindi", "Pashto", "Punjabi", "Sindhi", "Balochi", "Saraiki", "Kashmiri"].includes(l.language)
+                        );
+                        const middleEastern = langs.filter((l: {language: string}) => 
+                          ["Arabic"].includes(l.language)
+                        );
+                        const international = langs.filter((l: {language: string}) => 
+                          ["English"].includes(l.language)
+                        );
+                        const others = langs.filter((l: {language: string}) => 
+                          !["Urdu", "Hindi", "Pashto", "Punjabi", "Sindhi", "Balochi", "Saraiki", "Kashmiri", "Arabic", "English"].includes(l.language)
+                        );
+                        
+                        return (
+                          <div className="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1 text-xs text-zinc-300">
+                            {international.length > 0 && (
+                              <div>
+                                <span className="text-zinc-500">International:</span>{' '}
+                                {international.map((l: {language: string, level: string}) => `${l.language} (${l.level})`).join(', ')}
+                              </div>
+                            )}
+                            
+                            {southAsian.length > 0 && (
+                              <div>
+                                <span className="text-zinc-500">South Asian:</span>{' '}
+                                {southAsian.map((l: {language: string, level: string}) => `${l.language} (${l.level})`).join(', ')}
+                              </div>
+                            )}
+                            
+                            {middleEastern.length > 0 && (
+                              <div>
+                                <span className="text-zinc-500">Middle Eastern:</span>{' '}
+                                {middleEastern.map((l: {language: string, level: string}) => `${l.language} (${l.level})`).join(', ')}
+                              </div>
+                            )}
+                            
+                            {others.length > 0 && (
+                              <div>
+                                <span className="text-zinc-500">Others:</span>{' '}
+                                {others.map((l: {language: string, level: string}) => `${l.language} (${l.level})`).join(', ')}
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })()}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            <div>
+              <span className="text-zinc-400">Selected Department:</span>{' '}
+              {(() => {
+                // Find department name from department ID
+                for (const category of ["Tech Division", "Creative Division", "Marketing Division", "Business Operations"]) {
+                  if (formData.department?.includes(category.split(' ')[0].toLowerCase())) {
+                    return category;
+                  }
+                }
+                return formData.department || 'Not specified';
+              })()}
+            </div>
+            
+            {formData.interests?.length > 0 && (
+              <div>
+                <span className="text-zinc-400">Areas of Interest:</span>{' '}
+                {formData.interests.slice(0, 3).join(', ')}{formData.interests.length > 3 ? ` +${formData.interests.length - 3} more` : ''}
+              </div>
+            )}
+            
             <div>
               <span className="text-zinc-400">Education:</span> {formData.education[0]?.degree} in {formData.education[0]?.fieldOfStudy}
             </div>
-            <div>
-              <span className="text-zinc-400">Skills:</span> {formData.skills.slice(0, 3).join(', ')}{formData.skills.length > 3 ? ` +${formData.skills.length - 3} more` : ''}
-            </div>
+            
+            {formData.experience?.length > 0 && formData.experience[0]?.company && (
+              <div>
+                <span className="text-zinc-400">Experience:</span>{' '}
+                {formData.experience[0]?.position} at {formData.experience[0]?.company}
+              </div>
+            )}
+            
+            {formData.skills?.length > 0 && (
+              <div>
+                <span className="text-zinc-400">Skills:</span> {formData.skills.slice(0, 3).join(', ')}{formData.skills.length > 3 ? ` +${formData.skills.length - 3} more` : ''}
+              </div>
+            )}
+            
             {interviewDate && (
               <div>
                 <span className="text-zinc-400">Interview:</span> {interviewDate.toLocaleDateString('en-US', { 

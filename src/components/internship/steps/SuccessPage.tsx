@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import Confetti from 'react-confetti';
 import { useTranslation } from 'react-i18next';
 import { format } from 'date-fns';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 interface SuccessPageProps {
   formData: {
@@ -12,6 +14,35 @@ interface SuccessPageProps {
     interviewDate: Date | null;
     resumeUrl?: string;
     skills?: string[];
+    department?: string;
+    ikigaiResults?: {
+      departmentRecommendations?: Array<{
+        department: string;
+        score: number;
+        key: string;
+      }>;
+      teamSuggestions?: string[];
+      softSkills?: string[];
+      languages?: Array<{
+        language: string;
+        level: string;
+      }>;
+    };
+    education?: Array<{
+      institution: string;
+      degree: string;
+      fieldOfStudy: string;
+      graduationYear: string;
+    }>;
+    experience?: Array<{
+      company: string;
+      position: string;
+      startDate: string;
+      endDate: string;
+      description: string;
+    }>;
+    interests?: string[];
+    coverLetter?: string;
   };
   onReset: () => void;
 }
@@ -20,6 +51,8 @@ export const SuccessPage: React.FC<SuccessPageProps> = ({ formData, onReset }) =
   const { t } = useTranslation();
   const [confettiActive, setConfettiActive] = useState(true);
   const [windowDimensions, setWindowDimensions] = useState({ width: 0, height: 0 });
+  const [pdfGenerating, setPdfGenerating] = useState(false);
+  const [pdfGenerated, setPdfGenerated] = useState(false);
 
   // Get window dimensions for confetti
   useEffect(() => {
@@ -46,6 +79,166 @@ export const SuccessPage: React.FC<SuccessPageProps> = ({ formData, onReset }) =
       clearTimeout(timer);
     };
   }, []);
+
+  // Function to generate PDF
+  const generatePDF = () => {
+    setPdfGenerating(true);
+    
+    setTimeout(() => {
+      try {
+        // Create new PDF document
+        const doc = new jsPDF();
+        
+        // Add TedRed logo/header
+        doc.setFillColor(237, 68, 68); // Red color
+        doc.rect(0, 0, 210, 20, 'F');
+        doc.setTextColor(255, 255, 255);
+        doc.setFontSize(16);
+        doc.text('TedRed Internship Application', 105, 12, { align: 'center' });
+        
+        // Add applicant info
+        doc.setTextColor(0, 0, 0);
+        doc.setFontSize(14);
+        doc.text('Application Summary', 14, 30);
+        
+        // Reference number
+        const refNumber = `TED-${Math.floor(Math.random() * 100000)}`;
+        
+        // Add basic information table
+        autoTable(doc, {
+          startY: 35,
+          head: [['Basic Information', '']],
+          body: [
+            ['Full Name', `${formData.firstName} ${formData.lastName}`],
+            ['Email', formData.email],
+            ['Reference Number', refNumber],
+            ['Selected Department', getDepartmentName(formData.department)],
+            ['Interview Date', formData.interviewDate ? format(formData.interviewDate, 'EEEE, MMMM d, yyyy - h:mm a') : 'Not scheduled'],
+            ['Resume', formData.resumeUrl ? 'Uploaded' : 'Not provided']
+          ],
+          theme: 'striped',
+          headStyles: { fillColor: [237, 68, 68] }
+        });
+        
+        // Add Ikigai assessment results if available
+        if (formData.ikigaiResults?.departmentRecommendations?.length) {
+          const lastY = (doc as any).lastAutoTable.finalY;
+          
+          autoTable(doc, {
+            startY: lastY + 10,
+            head: [['Ikigai Assessment Results', '']],
+            body: [
+              ['Top Recommended Department', formData.ikigaiResults.departmentRecommendations[0].department],
+              ['Recommended Teams', formData.ikigaiResults.teamSuggestions?.join(', ') || 'None'],
+              ['Key Strengths', formData.ikigaiResults.softSkills?.join(', ') || 'None'],
+              ['Languages', formatLanguages(formData.ikigaiResults.languages) || 'None']
+            ],
+            theme: 'striped',
+            headStyles: { fillColor: [237, 68, 68] }
+          });
+        }
+        
+        // Add education and experience
+        if (formData.education?.length) {
+          const lastY = (doc as any).lastAutoTable.finalY;
+          
+          autoTable(doc, {
+            startY: lastY + 10,
+            head: [['Education', '']],
+            body: formData.education.map(edu => [
+              `${edu.degree} in ${edu.fieldOfStudy}`,
+              `${edu.institution}, ${edu.graduationYear}`
+            ]),
+            theme: 'striped',
+            headStyles: { fillColor: [237, 68, 68] }
+          });
+        }
+        
+        if (formData.experience?.length) {
+          const lastY = (doc as any).lastAutoTable.finalY;
+          
+          autoTable(doc, {
+            startY: lastY + 10,
+            head: [['Experience', '']],
+            body: formData.experience.map(exp => [
+              `${exp.position} at ${exp.company}`,
+              `${exp.startDate} - ${exp.endDate}`
+            ]),
+            theme: 'striped',
+            headStyles: { fillColor: [237, 68, 68] }
+          });
+        }
+        
+        // Add interests and skills
+        if (formData.interests?.length || formData.skills?.length) {
+          const lastY = (doc as any).lastAutoTable.finalY;
+          
+          const skillsData = [];
+          if (formData.interests?.length) {
+            skillsData.push(['Areas of Interest', formData.interests.join(', ')]);
+          }
+          
+          if (formData.skills?.length) {
+            skillsData.push(['Skills', formData.skills.join(', ')]);
+          }
+          
+          autoTable(doc, {
+            startY: lastY + 10,
+            head: [['Skills & Interests', '']],
+            body: skillsData,
+            theme: 'striped',
+            headStyles: { fillColor: [237, 68, 68] }
+          });
+        }
+        
+        // Add cover letter if provided
+        if (formData.coverLetter) {
+          const lastY = (doc as any).lastAutoTable.finalY;
+          
+          autoTable(doc, {
+            startY: lastY + 10,
+            head: [['Cover Letter', '']],
+            body: [[formData.coverLetter, '']],
+            theme: 'striped',
+            headStyles: { fillColor: [237, 68, 68] }
+          });
+        }
+        
+        // Add footer with instructions
+        const lastY = (doc as any).lastAutoTable.finalY;
+        doc.setFontSize(10);
+        doc.setTextColor(100, 100, 100);
+        doc.text('Please email this PDF to hr@tedred.com to complete your application process.', 105, lastY + 20, { align: 'center' });
+        doc.text(`Generated on ${new Date().toLocaleDateString()} for ${formData.firstName} ${formData.lastName}`, 105, lastY + 25, { align: 'center' });
+        
+        // Save the PDF
+        doc.save(`TedRed_Application_${formData.firstName}_${formData.lastName}.pdf`);
+        
+        setPdfGenerated(true);
+        setPdfGenerating(false);
+      } catch (error) {
+        console.error('Error generating PDF:', error);
+        setPdfGenerating(false);
+      }
+    }, 500);
+  };
+  
+  const formatLanguages = (languages?: Array<{language: string, level: string}>) => {
+    if (!languages || languages.length === 0) return null;
+    return languages.map(l => `${l.language} (${l.level})`).join(', ');
+  };
+  
+  const getDepartmentName = (deptKey?: string) => {
+    if (!deptKey) return 'Not specified';
+    
+    // Find department name from department ID
+    for (const category of ["Tech Division", "Creative Division", "Marketing Division", "Business Operations"]) {
+      if (deptKey.toLowerCase().includes(category.split(' ')[0].toLowerCase())) {
+        return category;
+      }
+    }
+    return deptKey;
+  };
 
   return (
     <div className="relative">
@@ -139,13 +332,47 @@ export const SuccessPage: React.FC<SuccessPageProps> = ({ formData, onReset }) =
             </div>
           </div>
 
-          <div className="bg-green-900/20 border border-green-800 rounded-lg p-3 sm:p-4 mb-6 sm:mb-8 max-w-lg mx-auto">
-            <p className="text-green-300 flex items-start sm:items-center flex-col sm:flex-row">
-              <svg className="w-5 h-5 mr-0 sm:mr-2 mb-2 sm:mb-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          {/* PDF Generation Button and Instructions */}
+          <div className="bg-blue-900/20 border border-blue-800 rounded-lg p-4 sm:p-5 mb-6 sm:mb-8 max-w-lg mx-auto">
+            <h4 className="font-medium text-blue-300 mb-2 flex items-center">
+              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
-              <span>A confirmation email has been sent to <span className="font-semibold ml-1 break-all">{formData.email}</span></span>
+              Application PDF Summary
+            </h4>
+            <p className="text-zinc-300 text-sm mb-3">
+              Generate a PDF summary of your application that you can download and email to <span className="font-semibold text-blue-300">hr@tedred.com</span> to complete your application process.
             </p>
+            <button
+              onClick={generatePDF}
+              disabled={pdfGenerating}
+              className="w-full py-2.5 rounded-lg font-medium bg-blue-600 hover:bg-blue-700 disabled:bg-blue-900/50 text-white transition-colors duration-200 flex items-center justify-center"
+            >
+              {pdfGenerating ? (
+                <>
+                  <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Generating PDF...
+                </>
+              ) : (
+                <>
+                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  </svg>
+                  {pdfGenerated ? 'Download PDF Again' : 'Generate & Download PDF'}
+                </>
+              )}
+            </button>
+            {pdfGenerated && (
+              <p className="text-xs text-green-400 mt-2 flex items-center">
+                <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                PDF generated successfully! Please email it to hr@tedred.com
+              </p>
+            )}
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
