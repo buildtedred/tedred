@@ -18,6 +18,7 @@ import { About } from './pages/About';
 import { Careers } from './pages/Careers';
 import { Stories } from './pages/Stories';
 import { Home } from './pages/Home';
+import { Internship } from './pages/Internship';
 
 function App() {
   const { i18n } = useTranslation();
@@ -122,6 +123,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/careers" element={<Careers />} />
+        <Route path="/internship" element={<Internship />} />
       </Routes>
     </BrowserRouter>
   );
