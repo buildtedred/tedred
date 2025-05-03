@@ -235,10 +235,10 @@ export const InternshipForm = () => {
   return (
     <div className="bg-zinc-900/90 border border-zinc-800 p-4 sm:p-6 md:p-8 rounded-xl shadow-xl mb-6 md:mb-12 w-full max-w-4xl mx-auto">
       {/* Progress bar */}
-      <div className="mb-6 md:mb-8 px-0 sm:px-4">
+      <div className="mb-8 md:mb-10 px-1 sm:px-4">
         {/* Step numbers and labels */}
-        <div className="relative mb-6 md:mb-8">
-          <div className="flex justify-between mb-2">
+        <div className="relative mb-7 md:mb-8">
+          <div className="flex justify-between mb-3">
             {STEPS.map((s) => {
               const status = getStepStatus(s.id);
               return (
@@ -250,22 +250,22 @@ export const InternshipForm = () => {
                 >
                   <div 
                     className={`
-                      relative z-10 flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 md:w-9 md:h-9 rounded-full text-[10px] sm:text-xs md:text-sm font-medium transition-all duration-300 shadow-md
+                      relative z-10 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11 rounded-full text-xs sm:text-sm md:text-base font-medium transition-all duration-300 shadow-md
                       ${status === 'current' ? 'bg-red-500 text-white ring-2 ring-red-300 ring-opacity-50' : 
                         status === 'completed' ? 'bg-green-500 text-white' : 'bg-zinc-800 text-zinc-400'}
                     `}
                   >
                     {status === 'completed' ? (
-                      <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     ) : s.id}
                   </div>
                   <span 
                     className={`
-                      mt-1.5 sm:mt-2 text-[8px] sm:text-[10px] md:text-xs font-medium transition-colors duration-300 max-w-[60px] text-center
-                      ${status === 'current' ? 'text-red-500' : 
-                        status === 'completed' ? 'text-green-500' : 'text-zinc-500'}
+                      mt-2 text-[9px] sm:text-xs md:text-sm font-medium transition-colors duration-300 max-w-[50px] sm:max-w-[70px] text-center
+                      ${status === 'current' ? 'text-red-400' : 
+                        status === 'completed' ? 'text-green-400' : 'text-zinc-500'}
                     `}
                   >
                     {s.name}
@@ -276,7 +276,7 @@ export const InternshipForm = () => {
           </div>
           
           {/* Connecting line */}
-          <div className="absolute top-3 sm:top-4 md:top-4.5 left-0 right-0 h-0.5 -translate-y-1/2 bg-zinc-800">
+          <div className="absolute top-4 sm:top-5 md:top-5.5 left-0 right-0 h-1 -translate-y-1/2 bg-zinc-800">
             <div 
               className="h-full bg-gradient-to-r from-red-500 to-green-500 transition-all duration-500 ease-in-out"
               style={{ width: `${progressPercentage}%` }}
@@ -293,7 +293,7 @@ export const InternshipForm = () => {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -20 }}
           transition={{ duration: 0.3 }}
-          className="min-h-[300px] w-full px-1 sm:px-4 md:px-6"
+          className="min-h-[300px] w-full px-2 sm:px-4 md:px-6"
         >
           {renderStep()}
         </motion.div>
