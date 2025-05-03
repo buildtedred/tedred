@@ -154,7 +154,7 @@ export const InternshipForm = () => {
   // If the form is submitted successfully, show the success page
   if (isSubmitted) {
     return (
-      <div className="bg-zinc-900/90 border border-zinc-800 p-6 md:p-8 rounded-xl shadow-xl mb-12 max-w-4xl mx-auto">
+      <div className="bg-zinc-900/80 border border-zinc-800 p-6 md:p-8 rounded-xl shadow-xl w-full">
         <SuccessPage formData={formData} onReset={handleReset} />
       </div>
     );
@@ -233,7 +233,7 @@ export const InternshipForm = () => {
   const progressPercentage = ((step - 1) / (totalSteps - 1)) * 100;
 
   return (
-    <div className="bg-zinc-900/90 border border-zinc-800 p-4 sm:p-6 md:p-8 rounded-xl shadow-xl mb-6 md:mb-12 w-full max-w-4xl mx-auto">
+    <div className="bg-zinc-900/80 border border-zinc-800 p-4 sm:p-6 md:p-8 rounded-xl shadow-xl w-full">
       {/* Progress bar */}
       <div className="mb-8 md:mb-10 px-1 sm:px-4">
         {/* Step numbers and labels */}
