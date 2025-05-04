@@ -424,8 +424,8 @@ export const IkigaiStep = ({ formData, updateFormData, onNext, onPrevious }: Iki
   const currentSection = ikigaiSections[step];
 
   return (
-    <div className="mx-auto">
-      <h2 className="text-xl sm:text-2xl font-bold mb-5 sm:mb-8 mt-1 sm:mt-2">Discover Your Strengths</h2>
+    <div className="mx-auto form-step">
+      <h2 className="text-lg xs:text-xl sm:text-2xl font-bold mb-4 sm:mb-8 mt-1 sm:mt-2 text-center">Discover Your Strengths</h2>
       
       <form onSubmit={(e) => { e.preventDefault(); handleNext(); }}>
         <motion.div
@@ -456,26 +456,27 @@ export const IkigaiStep = ({ formData, updateFormData, onNext, onPrevious }: Iki
                   className="mb-6 bg-zinc-900/50 p-4 sm:p-5 rounded-lg border border-zinc-800"
                 >
                   <p className="mb-3 text-sm sm:text-base">{question.text}</p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs text-zinc-500">Strongly Disagree</span>
-                    <div className="flex gap-2 sm:gap-3">
+                  <div className="flex flex-col sm:flex-row items-center justify-between">
+                    <span className="text-xs text-zinc-500 mb-2 sm:mb-0">Strongly Disagree</span>
+                    <div className="flex gap-3 sm:gap-3 my-2 sm:my-0">
                       {[1, 2, 3, 4, 5].map((rating) => (
                         <button
                           key={rating}
                           type="button"
                           onClick={() => handleRatingChange(question.id, rating)}
                           className={`
-                            w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-xs sm:text-sm transition-all
+                            w-10 h-10 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-sm transition-all
                             ${answers[question.id] === rating 
                               ? 'bg-red-500 text-white' 
                               : 'bg-zinc-800 text-zinc-400 hover:bg-zinc-700'}
                           `}
+                          aria-label={`Rating ${rating}`}
                         >
                           {rating}
                         </button>
                       ))}
                     </div>
-                    <span className="text-xs text-zinc-500">Strongly Agree</span>
+                    <span className="text-xs text-zinc-500 mt-2 sm:mt-0">Strongly Agree</span>
                   </div>
                 </motion.div>
               ))}
@@ -492,13 +493,13 @@ export const IkigaiStep = ({ formData, updateFormData, onNext, onPrevious }: Iki
               {/* Language list */}
               <div className="space-y-3 mb-5">
                 {languages.map((lang, index) => (
-                  <div key={index} className="flex flex-col sm:flex-row items-center gap-2 bg-zinc-900/50 p-3 rounded-lg border border-zinc-800">
-                    <div className="w-full sm:w-auto text-sm font-medium flex-1">{lang.language}</div>
-                    <div className="text-sm text-zinc-400 flex-1">{lang.level}</div>
+                  <div key={index} className="flex flex-col sm:flex-row items-start sm:items-center gap-2 bg-zinc-900/50 p-3 rounded-lg border border-zinc-800">
+                    <div className="w-full sm:w-auto text-sm font-medium flex-1 mb-1 sm:mb-0">{lang.language}</div>
+                    <div className="text-sm text-zinc-400 flex-1 mb-1 sm:mb-0">{lang.level}</div>
                     <button
                       type="button"
                       onClick={() => handleRemoveLanguage(index)}
-                      className="p-2 text-zinc-500 hover:text-red-500 rounded"
+                      className="p-2 text-zinc-500 hover:text-red-500 rounded self-end sm:self-auto"
                     >
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -516,13 +517,13 @@ export const IkigaiStep = ({ formData, updateFormData, onNext, onPrevious }: Iki
                     value={newLanguage}
                     onChange={(e) => setNewLanguage(e.target.value)}
                     placeholder="Enter language (e.g. Urdu, Pashto, English)"
-                    className="w-full p-3 bg-zinc-800 border border-zinc-700 rounded-lg text-white"
+                    className="w-full p-3 bg-zinc-800 border border-zinc-700 rounded-lg text-white text-sm"
                   />
                   
                   <select
                     value={newLevel}
                     onChange={(e) => setNewLevel(e.target.value)}
-                    className="w-full p-3 bg-zinc-800 border border-zinc-700 rounded-lg text-white"
+                    className="w-full p-3 bg-zinc-800 border border-zinc-700 rounded-lg text-white text-sm"
                   >
                     <option value="">Select proficiency level</option>
                     <option value="Beginner / A1-A2">Beginner / A1-A2</option>
@@ -535,9 +536,9 @@ export const IkigaiStep = ({ formData, updateFormData, onNext, onPrevious }: Iki
                     type="button"
                     onClick={handleAddLanguage}
                     disabled={!newLanguage || !newLevel}
-                    className="w-full p-3 bg-red-500 hover:bg-red-600 disabled:bg-zinc-700 text-white rounded-lg flex items-center justify-center gap-2"
+                    className="w-full p-2.5 sm:p-3 bg-red-500 hover:bg-red-600 disabled:bg-zinc-700 text-white rounded-lg flex items-center justify-center gap-2 text-sm"
                   >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                     </svg>
                     Add Language
@@ -557,25 +558,25 @@ export const IkigaiStep = ({ formData, updateFormData, onNext, onPrevious }: Iki
                 </div>
               ) : (
                 <>
-                  <div className="bg-zinc-900/50 p-4 sm:p-6 rounded-lg border border-zinc-800 mb-6">
-                    <h4 className="text-base sm:text-lg font-medium mb-3">Department Recommendations</h4>
-                    <p className="text-sm text-zinc-300 mb-4">Based on your Ikigai assessment, here are the departments that align with your strengths and interests:</p>
+                  <div className="bg-zinc-900/50 p-3 sm:p-4 md:p-6 rounded-lg border border-zinc-800 mb-4 sm:mb-6">
+                    <h4 className="text-base sm:text-lg font-medium mb-2 sm:mb-3">Department Recommendations</h4>
+                    <p className="text-xs sm:text-sm text-zinc-300 mb-3 sm:mb-4">Based on your Ikigai assessment, here are the departments that align with your strengths and interests:</p>
                     
-                    <div className="space-y-3">
+                    <div className="space-y-2 sm:space-y-3">
                       {recommendations.map((rec, index) => (
                         <div 
                           key={rec.key} 
-                          className={`p-3 rounded-lg border ${index === 0 ? 'bg-red-500/10 border-red-500' : 'bg-zinc-800/50 border-zinc-700'}`}
+                          className={`p-2.5 sm:p-3 rounded-lg border ${index === 0 ? 'bg-red-500/10 border-red-500' : 'bg-zinc-800/50 border-zinc-700'}`}
                         >
                           <div className="flex justify-between items-center">
-                            <span className={`text-sm sm:text-base font-medium ${index === 0 ? 'text-red-400' : 'text-zinc-300'}`}>
+                            <span className={`text-xs sm:text-base font-medium ${index === 0 ? 'text-red-400' : 'text-zinc-300'}`}>
                               {rec.department}
                             </span>
                             <div className="flex items-center">
                               {[1, 2, 3, 4, 5].map((star) => (
                                 <Star 
                                   key={star} 
-                                  size={14} 
+                                  size={12} 
                                   className={`${star <= Math.round(rec.score / 4) ? (index === 0 ? 'text-red-500' : 'text-zinc-400') : 'text-zinc-800'}`} 
                                   fill={star <= Math.round(rec.score / 4) ? 'currentColor' : 'none'} 
                                 />
@@ -584,11 +585,11 @@ export const IkigaiStep = ({ formData, updateFormData, onNext, onPrevious }: Iki
                           </div>
                           
                           {index === 0 && teamSuggestions.length > 0 && (
-                            <div className="mt-3 pt-3 border-t border-red-500/30">
-                              <p className="text-xs text-zinc-400 mb-2">Recommended Teams:</p>
-                              <div className="flex flex-wrap gap-2">
+                            <div className="mt-2 pt-2 border-t border-red-500/30">
+                              <p className="text-xs text-zinc-400 mb-1.5">Recommended Teams:</p>
+                              <div className="flex flex-wrap gap-1.5">
                                 {teamSuggestions.map(team => (
-                                  <span key={team} className="px-2 py-1 text-xs bg-red-500/20 text-red-300 rounded-full">
+                                  <span key={team} className="px-2 py-0.5 text-[10px] sm:text-xs bg-red-500/20 text-red-300 rounded-full">
                                     {team}
                                   </span>
                                 ))}
@@ -597,7 +598,7 @@ export const IkigaiStep = ({ formData, updateFormData, onNext, onPrevious }: Iki
                           )}
                           
                           {rec.enhancements && rec.enhancements.length > 0 && (
-                            <div className="mt-2 text-xs">
+                            <div className="mt-1.5 text-[10px] sm:text-xs">
                               <span className="text-zinc-500">Strengths: </span>
                               <span className={index === 0 ? "text-red-300" : "text-zinc-400"}>
                                 {rec.enhancements.join(', ')}
@@ -610,15 +611,15 @@ export const IkigaiStep = ({ formData, updateFormData, onNext, onPrevious }: Iki
                   </div>
                   
                   {/* Display key skills and languages */}
-                  <div className="bg-zinc-900/50 p-4 sm:p-6 rounded-lg border border-zinc-800 mb-6">
-                    <h4 className="text-base sm:text-lg font-medium mb-3">Your Profile</h4>
+                  <div className="bg-zinc-900/50 p-3 sm:p-4 md:p-6 rounded-lg border border-zinc-800 mb-4 sm:mb-6">
+                    <h4 className="text-base sm:text-lg font-medium mb-2 sm:mb-3">Your Profile</h4>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 gap-4">
                       <div>
-                        <h5 className="text-sm font-medium text-zinc-300 mb-2">Key Strengths</h5>
-                        <div className="flex flex-wrap gap-2">
+                        <h5 className="text-xs sm:text-sm font-medium text-zinc-300 mb-1.5 sm:mb-2">Key Strengths</h5>
+                        <div className="flex flex-wrap gap-1.5 sm:gap-2">
                           {getTopSoftSkills(answers).map(skill => (
-                            <span key={skill} className="px-2 py-1 text-xs bg-purple-500/20 text-purple-300 rounded-full">
+                            <span key={skill} className="px-2 py-0.5 text-[10px] sm:text-xs bg-purple-500/20 text-purple-300 rounded-full">
                               {skill}
                             </span>
                           ))}
@@ -626,29 +627,29 @@ export const IkigaiStep = ({ formData, updateFormData, onNext, onPrevious }: Iki
                       </div>
                       
                       <div>
-                        <h5 className="text-sm font-medium text-zinc-300 mb-2">Languages</h5>
+                        <h5 className="text-xs sm:text-sm font-medium text-zinc-300 mb-1.5 sm:mb-2">Languages</h5>
                         {languages.length > 0 ? (
                           <div className="space-y-1">
                             {languages.map((lang, index) => (
-                              <div key={index} className="flex justify-between text-xs">
+                              <div key={index} className="flex justify-between text-[10px] sm:text-xs">
                                 <span className="text-zinc-300">{lang.language}</span>
                                 <span className="text-indigo-400">{lang.level}</span>
                               </div>
                             ))}
                           </div>
                         ) : (
-                          <p className="text-xs text-zinc-500">No languages selected</p>
+                          <p className="text-[10px] sm:text-xs text-zinc-500">No languages selected</p>
                         )}
                       </div>
                     </div>
                   </div>
                   
-                  <div className="bg-zinc-900/50 p-4 sm:p-6 rounded-lg border border-zinc-800">
-                    <h4 className="text-base sm:text-lg font-medium mb-3">What's Next?</h4>
-                    <p className="text-sm text-zinc-300 mb-3">
+                  <div className="bg-zinc-900/50 p-3 sm:p-4 md:p-6 rounded-lg border border-zinc-800">
+                    <h4 className="text-base sm:text-lg font-medium mb-2 sm:mb-3">What's Next?</h4>
+                    <p className="text-xs sm:text-sm text-zinc-300 mb-2 sm:mb-3">
                       In the next step, you'll select your preferred department and specific areas of interest.
                     </p>
-                    <p className="text-sm text-zinc-300">
+                    <p className="text-xs sm:text-sm text-zinc-300">
                       Consider these recommendations as you make your selection, but feel free to choose any department that interests you.
                     </p>
                   </div>
@@ -657,24 +658,24 @@ export const IkigaiStep = ({ formData, updateFormData, onNext, onPrevious }: Iki
             </motion.div>
           )}
           
-          <motion.div className="flex justify-between mt-8 sm:mt-10" variants={itemVariants}>
+          <motion.div className="flex justify-between mt-6 sm:mt-10" variants={itemVariants}>
             <button
               type="button"
               onClick={handlePrevious}
-              className="bg-zinc-800 hover:bg-zinc-700 text-white font-medium py-2.5 sm:py-3 px-6 sm:px-8 rounded-lg transition-colors duration-200 flex items-center text-sm sm:text-base"
+              className="bg-zinc-800 hover:bg-zinc-700 text-white font-medium py-2 sm:py-3 px-4 sm:px-8 rounded-lg transition-colors duration-200 flex items-center text-sm"
             >
-              <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-1.5 sm:mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7"></path>
               </svg>
               Back
             </button>
             
-            <div className="flex gap-3">
+            <div className="flex gap-2 sm:gap-3">
               {step === 0 && (
                 <button
                   type="button"
                   onClick={handleSkipIkigai}
-                  className="bg-zinc-700 hover:bg-zinc-600 text-white font-medium py-2.5 sm:py-3 px-6 sm:px-8 rounded-lg transition-colors duration-200 text-sm sm:text-base"
+                  className="bg-zinc-700 hover:bg-zinc-600 text-white font-medium py-2 sm:py-3 px-4 sm:px-6 rounded-lg transition-colors duration-200 text-sm"
                 >
                   Skip
                 </button>
@@ -682,10 +683,10 @@ export const IkigaiStep = ({ formData, updateFormData, onNext, onPrevious }: Iki
               
               <button
                 type="submit"
-                className="bg-red-500 hover:bg-red-600 text-white font-medium py-2.5 sm:py-3 px-6 sm:px-8 rounded-lg transition-colors duration-200 flex items-center text-sm sm:text-base"
+                className="bg-red-500 hover:bg-red-600 text-white font-medium py-2 sm:py-3 px-4 sm:px-6 rounded-lg transition-colors duration-200 flex items-center text-sm"
               >
                 {step < 6 ? 'Next' : 'Continue'}
-                <svg className="w-4 h-4 sm:w-5 sm:h-5 ml-1.5 sm:ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg className="w-4 h-4 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7"></path>
                 </svg>
               </button>

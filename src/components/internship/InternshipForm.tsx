@@ -154,7 +154,7 @@ export const InternshipForm = () => {
   // If the form is submitted successfully, show the success page
   if (isSubmitted) {
     return (
-      <div className="bg-zinc-900/80 border border-zinc-800 p-6 md:p-8 rounded-xl shadow-xl w-full">
+      <div className="bg-zinc-900/80 border border-zinc-800 p-6 md:p-8 rounded-xl shadow-xl w-full internship-form">
         <SuccessPage formData={formData} onReset={handleReset} />
       </div>
     );
@@ -233,50 +233,61 @@ export const InternshipForm = () => {
   const progressPercentage = ((step - 1) / (totalSteps - 1)) * 100;
 
   return (
-    <div className="bg-zinc-900/80 border border-zinc-800 p-4 sm:p-6 md:p-8 rounded-xl shadow-xl w-full">
+    <div className="bg-zinc-900/80 border border-zinc-800 p-4 sm:p-6 md:p-8 rounded-xl shadow-xl w-full internship-form">
       {/* Progress bar */}
       <div className="mb-8 md:mb-10 px-1 sm:px-4">
         {/* Step numbers and labels */}
         <div className="relative mb-7 md:mb-8">
-          <div className="flex justify-between mb-3">
-            {STEPS.map((s) => {
-              const status = getStepStatus(s.id);
-              return (
-                <button 
-                  key={s.id} 
-                  className={`flex flex-col items-center transition-colors duration-300 ${status === 'completed' ? 'cursor-pointer' : ''}`}
-                  onClick={() => status === 'completed' && handleJumpToStep(s.id)}
-                  disabled={status !== 'completed' && status !== 'current'}
-                >
-                  <div 
-                    className={`
-                      relative z-10 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11 rounded-full text-xs sm:text-sm md:text-base font-medium transition-all duration-300 shadow-md
-                      ${status === 'current' ? 'bg-red-500 text-white ring-2 ring-red-300 ring-opacity-50' : 
-                        status === 'completed' ? 'bg-green-500 text-white' : 'bg-zinc-800 text-zinc-400'}
-                    `}
+          <div className="relative">
+            <div className="flex overflow-x-auto pb-5 sm:pb-0 no-scrollbar gap-2 px-1 md:gap-0 md:justify-between mb-3 steps-scroll">
+              {STEPS.map((s) => {
+                const status = getStepStatus(s.id);
+                return (
+                  <button 
+                    key={s.id} 
+                    className={`flex flex-col items-center transition-colors duration-300 flex-shrink-0 min-w-[60px] sm:min-w-0 ${status === 'completed' ? 'cursor-pointer' : ''}`}
+                    onClick={() => status === 'completed' && handleJumpToStep(s.id)}
+                    disabled={status !== 'completed' && status !== 'current'}
                   >
-                    {status === 'completed' ? (
-                      <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                    ) : s.id}
-                  </div>
-                  <span 
-                    className={`
-                      mt-2 text-[9px] sm:text-xs md:text-sm font-medium transition-colors duration-300 max-w-[50px] sm:max-w-[70px] text-center
-                      ${status === 'current' ? 'text-red-400' : 
-                        status === 'completed' ? 'text-green-400' : 'text-zinc-500'}
-                    `}
-                  >
-                    {s.name}
-                  </span>
-                </button>
-              );
-            })}
+                    <div 
+                      className={`
+                        relative z-10 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 md:w-11 md:h-11 rounded-full text-xs sm:text-sm md:text-base font-medium transition-all duration-300 shadow-md
+                        ${status === 'current' ? 'bg-red-500 text-white ring-2 ring-red-300 ring-opacity-50' : 
+                          status === 'completed' ? 'bg-green-500 text-white' : 'bg-zinc-800 text-zinc-400'}
+                      `}
+                    >
+                      {status === 'completed' ? (
+                        <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      ) : s.id}
+                    </div>
+                    <span 
+                      className={`
+                        mt-2 text-[9px] sm:text-xs md:text-sm font-medium transition-colors duration-300 max-w-[50px] sm:max-w-[70px] text-center
+                        ${status === 'current' ? 'text-red-400' : 
+                          status === 'completed' ? 'text-green-400' : 'text-zinc-500'}
+                      `}
+                    >
+                      {s.name}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+            
+            {/* Scroll indicator for mobile */}
+            <div className="absolute -bottom-1 left-0 right-0 flex justify-center md:hidden">
+              <div className="flex space-x-1">
+                <span className="h-1 w-6 rounded-full bg-red-400/50"></span>
+                <span className="h-1 w-1 rounded-full bg-zinc-500/50"></span>
+                <span className="h-1 w-1 rounded-full bg-zinc-500/50"></span>
+              </div>
+            </div>
           </div>
           
           {/* Connecting line */}
-          <div className="absolute top-4 sm:top-5 md:top-5.5 left-0 right-0 h-1 -translate-y-1/2 bg-zinc-800">
+          <div className="absolute top-4 sm:top-5 md:top-5.5 left-0 right-0 h-1 -translate-y-1/2 bg-zinc-800 hidden md:block">
             <div 
               className="h-full bg-gradient-to-r from-red-500 to-green-500 transition-all duration-500 ease-in-out"
               style={{ width: `${progressPercentage}%` }}

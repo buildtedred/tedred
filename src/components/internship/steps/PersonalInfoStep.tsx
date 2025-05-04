@@ -146,7 +146,7 @@ export const PersonalInfoStep = ({ formData, updateFormData, onNext }: PersonalI
   };
   
   return (
-    <div className="mx-auto">
+    <div className="mx-auto form-step">
       <h2 className="text-2xl sm:text-2xl font-bold mb-6 sm:mb-8 text-center">
         <span className="inline-block pb-2 border-b-2 border-red-500 px-2">Personal Information</span>
       </h2>
